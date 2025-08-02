@@ -338,7 +338,7 @@ html {
 /* About Section */
 #about {
   background: linear-gradient(135deg, #f1f5fb 0%, #e2e8f0 100%);
-  padding: 100px 20px;
+  padding: 100px 30px;
 }
 
 .container {
@@ -894,6 +894,52 @@ html {
   color: #ffd700;
   margin-bottom: 15px;
 }
+/* Form Testimoni Input */
+.testimonial-form {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.testimonial-form h3 {
+  color: #1e3c72;
+  margin-bottom: 20px;
+}
+
+.testimonial-form form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-form input,
+.testimonial-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.testimonial-form button {
+  padding: 10px 20px;
+  background-color: #2a5298;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.testimonial-form button:hover {
+  background-color: #1e3c72;
+}
+
 
 /* FAQ Section */
 .faq-section {
@@ -986,6 +1032,12 @@ html {
   font-size: 3rem;
   margin-bottom: 20px;
 }
+/* Pusatkan item ke-3 (Email) agar tampil rapi di tengah */
+.contact-options .contact-item:nth-child(3) {
+  grid-column: 1 / -1;     /* Ambil seluruh baris grid */
+  justify-self: center;    /* Posisikan di tengah horizontal */
+}
+
 
 /* Button */
 .btn-primary {

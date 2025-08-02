@@ -131,3 +131,55 @@
           item.style.transform = 'scale(1)';
         });
       });
+      document.addEventListener("DOMContentLoaded", function () {
+  loadTestimoni();
+
+      document.getElementById("formTestimoni").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+
+        fetch("/tambah_testimoni", {
+          method: "POST",
+          body: formData
+        })
+        .then(res => res.text())
+        .then(response => {
+          if (response === "success") {
+            Swal.fire({
+              icon: 'success',
+              title: 'Terima kasih!',
+              text: 'Testimoni berhasil dikirim.',
+              confirmButtonColor: '#2a5298'
+            });
+            this.reset();
+            loadTestimoni();
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Gagal mengirim testimoni.',
+              confirmButtonColor: '#d33'
+            });
+          }
+        });
+      });
+
+      function loadTestimoni() {
+        fetch("/ambil_testimoni")
+          .then(res => res.json())
+          .then(data => {
+            const container = document.getElementById("daftarTestimoni");
+            container.innerHTML = '';
+            data.forEach(([nama, pesan]) => {
+              const card = document.createElement("div");
+              card.className = "testimonial-card";
+              card.innerHTML = `
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="quote">"${pesan}"</p>
+                <p class="author">- ${nama}</p>
+              `;
+              container.appendChild(card);
+            });
+          });
+      }
+    });

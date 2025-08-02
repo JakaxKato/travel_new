@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PT. Kota Piring Kencana - Travel Haji & Umrah</title>
     <!-- Link ke file eksternal -->
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -14,6 +14,9 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   </head>
   <body>
     <!-- Topbar -->
@@ -465,7 +468,8 @@
     <section class="testimonial-section" id="testimoni">
       <h2 class="center">Testimoni Jamaah</h2>
       <p class="center">Pengalaman nyata dari jamaah yang telah bersama kami</p>
-      
+
+      <!-- Testimoni statis -->
       <div class="testimonial-container">
         <div class="testimonial-card">
           <div class="stars">⭐⭐⭐⭐⭐</div>
@@ -475,7 +479,7 @@
           </p>
           <p class="author">- Ibu Siti Aminah, Jakarta</p>
         </div>
-        
+
         <div class="testimonial-card">
           <div class="stars">⭐⭐⭐⭐⭐</div>
           <p class="quote">
@@ -484,7 +488,7 @@
           </p>
           <p class="author">- Bapak Ahmad Suryadi, Bandung</p>
         </div>
-        
+
         <div class="testimonial-card">
           <div class="stars">⭐⭐⭐⭐⭐</div>
           <p class="quote">
@@ -494,7 +498,23 @@
           <p class="author">- Ibu Fatimah, Surabaya</p>
         </div>
       </div>
+
+      <!-- Form input testimoni user -->
+      <div class="testimonial-form" style="margin-top: 50px; text-align: center;">
+        <h3>Tulis Testimoni Anda</h3>
+        <form id="formTestimoni" style="max-width: 600px; margin: 0 auto;">
+          <input type="text" name="nama" placeholder="Nama Anda" required
+            style="width:100%; padding:10px; margin-bottom:10px; border-radius:10px;"><br>
+          <textarea name="pesan" placeholder="Tulis testimoni..." required
+            style="width:100%; padding:10px; border-radius:10px;"></textarea><br>
+          <button type="submit" class="btn-primary" style="margin-top:15px;">Kirim Testimoni</button>
+        </form>
+      </div>
+
+      <!-- Hasil testimoni dari database -->
+      <div id="daftarTestimoni" class="testimonial-container" style="margin-top: 40px;"></div>
     </section>
+
 
     <!-- FAQ Section -->
     <section class="faq-section" id="faq">
@@ -665,6 +685,6 @@
         Dipimpin oleh: Jachja Machmud, SE, M.Si
       </div>
     </footer>
-     <script defer src="script/script.js"></script>
+     <script src="{{ url_for('static', filename='script/script.js') }}"></script>
     </body>
 </html>
