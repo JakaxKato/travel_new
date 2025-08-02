@@ -814,13 +814,13 @@ html {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
-
+/*
 .gallery-item::before {
   content: "📸";
   font-size: 3rem;
   opacity: 0.3;
 }
-
+*/
 .gallery-overlay {
   position: absolute;
   bottom: 0;
@@ -836,6 +836,13 @@ html {
 .gallery-item:hover .gallery-overlay {
   transform: translateY(0);
 }
+.gallery-item img {
+  width: 100%;
+  height: auto; /* biar tidak terpotong */
+  object-fit: contain; /* atau gunakan 'cover' jika ingin tetap memenuhi kotak */
+  border-radius: 15px;
+}
+
 
 /* Testimonial Section */
 .testimonial-section {
