@@ -96,7 +96,6 @@ html {
   color: #ffd700; /* Warna hover jika ingin efek keemasan */
 }
 
-
 /* Mobile Menu */
 .mobile-menu-toggle {
   display: none;
@@ -779,8 +778,439 @@ html {
 }
 
 .include-item i {
-  color: #4CAF50;
+  color: #4caf50;
   font-size: 0.8rem;
+}
+/*haji */
+.paket-haji-section {
+  padding: 60px 0;
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.1) 0%,
+    rgba(44, 90, 160, 0.1) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.paket-haji-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  animation: float 20s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #64748b;
+  margin-bottom: 50px;
+  font-style: italic;
+}
+
+.haji-flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.haji-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  padding: 40px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  max-width: 800px;
+  width: 100%;
+}
+
+.haji-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8, #1e40af);
+}
+
+.haji-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, #4a90e2, #2c5aa0);
+  border-radius: 15px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.haji-header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+}
+
+.haji-header h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.haji-header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.haji-price {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 25px;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  border-radius: 15px;
+  border-left: 5px solid #3b82f6;
+}
+
+.haji-price span {
+  display: block;
+  font-size: 1rem;
+  color: #64748b;
+  margin-bottom: 5px;
+}
+
+.haji-price strong {
+  display: block;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #1d4ed8;
+  margin-bottom: 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.haji-price p {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.haji-info {
+  margin-bottom: 30px;
+  padding: 25px;
+  background: linear-gradient(135deg, #e3f2fd, #f1f8e9);
+  border-radius: 15px;
+  border-left: 5px solid #2196f3;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+}
+
+.info-item:hover {
+  transform: translateX(5px);
+}
+
+.info-item i {
+  font-size: 1.2rem;
+  color: #2196f3;
+  margin-right: 10px;
+  width: 20px;
+}
+
+.info-item strong {
+  color: #2c3e50;
+  margin-right: 5px;
+}
+
+.haji-included,
+.haji-not-included {
+  margin-bottom: 25px;
+  padding: 25px;
+  border-radius: 15px;
+  position: relative;
+}
+
+.haji-included {
+  background: linear-gradient(135deg, #e8f5e8, #f0fff0);
+  border-left: 5px solid #2ecc71;
+}
+
+.haji-not-included {
+  background: linear-gradient(135deg, #fff3e0, #fdf7f0);
+  border-left: 5px solid #ff9800;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.section-header i {
+  font-size: 1.3rem;
+  margin-right: 10px;
+}
+
+.haji-included .section-header {
+  color: #2ecc71;
+}
+
+.haji-not-included .section-header {
+  color: #ff9800;
+}
+
+.feature-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.feature-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item i {
+  margin-right: 10px;
+  margin-top: 2px;
+  font-size: 0.9rem;
+}
+
+.haji-included .feature-item i {
+  color: #2ecc71;
+}
+
+.haji-not-included .feature-item i {
+  color: #ff9800;
+}
+
+.haji-terms {
+  margin-bottom: 25px;
+  padding: 25px;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border-radius: 15px;
+  border-left: 5px solid #3b82f6;
+}
+.btn-haji {
+  display: block;
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  text-decoration: none;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(46, 204, 113, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-haji::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-haji:hover::before {
+  left: 100%;
+}
+
+.btn-haji:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(46, 204, 113, 0.4);
+}
+
+.btn-haji i {
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.btn-haji:hover i {
+  transform: translateX(5px);
+}
+.haji-feature-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.haji-feature-flex > .haji-included,
+.haji-feature-flex > .haji-not-included {
+    flex: 1 1 48%;
+    padding: 25px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive: satu kolom di mobile */
+@media (max-width: 768px) {
+    .haji-feature-flex {
+        flex-direction: column;
+    }
+
+    .haji-feature-flex > .haji-included,
+    .haji-feature-flex > .haji-not-included {
+        flex: 1 1 100%;
+    }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .haji-flex-container {
+    padding: 0 10px;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+
+  .haji-card {
+    padding: 25px;
+    max-width: 1100;
+  }
+
+  .haji-header h3 {
+    font-size: 2rem;
+  }
+
+  .haji-price strong {
+    font-size: 2.2rem;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .haji-card {
+    padding: 20px;
+  }
+
+  .haji-header {
+    padding: 15px;
+  }
+
+  .haji-header h3 {
+    font-size: 1.8rem;
+  }
+
+  .haji-price strong {
+    font-size: 2rem;
+  }
 }
 
 /* Gallery Section */
@@ -842,7 +1272,6 @@ html {
   object-fit: contain; /* atau gunakan 'cover' jika ingin tetap memenuhi kotak */
   border-radius: 15px;
 }
-
 
 /* Testimonial Section */
 .testimonial-section {
@@ -947,7 +1376,6 @@ html {
   background-color: #1e3c72;
 }
 
-
 /* FAQ Section */
 .faq-section {
   padding: 80px 30px;
@@ -1041,10 +1469,9 @@ html {
 }
 /* Pusatkan item ke-3 (Email) agar tampil rapi di tengah */
 .contact-options .contact-item:nth-child(3) {
-  grid-column: 1 / -1;     /* Ambil seluruh baris grid */
-  justify-self: center;    /* Posisikan di tengah horizontal */
+  grid-column: 1 / -1; /* Ambil seluruh baris grid */
+  justify-self: center; /* Posisikan di tengah horizontal */
 }
-
 
 /* Button */
 .btn-primary {
@@ -1251,20 +1678,20 @@ html {
   .topbar {
     padding: 8px 20px;
   }
-  
+
   .topbar-left,
   .topbar-right {
     gap: 15px;
   }
-  
+
   .navbar {
     padding: 15px 20px;
   }
-  
+
   .mobile-menu-toggle {
     display: flex;
   }
-  
+
   .menu {
     display: none;
     position: absolute;
@@ -1276,15 +1703,15 @@ html {
     gap: 0;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
-  
+
   .menu.active {
     display: flex;
   }
-  
+
   .menu li {
     border-bottom: 1px solid #f0f0f0;
   }
-  
+
   .menu a {
     padding: 15px 20px;
     border-radius: 0;
@@ -1312,19 +1739,19 @@ html {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .package-cards {
     grid-template-columns: 1fr;
   }
-  
+
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .contact-options {
     grid-template-columns: 1fr;
   }
-  
+
   .timeline::before {
     left: 40px;
   }
@@ -1343,7 +1770,7 @@ html {
   .timeline-content {
     padding: 20px;
   }
-  
+
   .company-info,
   .timeline-container {
     padding: 30px 20px;
@@ -1354,25 +1781,25 @@ html {
   .hero h1 {
     font-size: 2rem;
   }
-  
+
   .stats-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .services-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .cards {
     grid-template-columns: 1fr;
   }
-  
+
   .topbar {
     flex-direction: column;
     gap: 10px;
     padding: 10px 20px;
   }
-  
+
   .topbar-left,
   .topbar-right {
     justify-content: center;
