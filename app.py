@@ -21,6 +21,11 @@ def init_db():
 def index():
     return render_template('index.html')
 
+# ✅ Halaman marketplace
+@app.route('/marketplace')
+def marketplace():
+    return render_template('marketplace.html')
+
 # API untuk menambah testimoni
 @app.route('/tambah_testimoni', methods=['POST'])
 def tambah_testimoni():
