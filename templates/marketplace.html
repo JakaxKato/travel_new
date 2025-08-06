@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketplace Keperluan Umroh - PT. Kota Piring Kencana</title>
+
+    <!-- Fonts & Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+      /* Reset dan font */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: #ffffff;
+        color: #333;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Topbar - sama seperti website utama */
+      .topbar {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: white;
+        padding: 8px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .topbar::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        animation: shimmer 3s infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      .topbar-left,
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .topbar i {
+        margin-right: 8px;
+      }
+
+      .topbar-right a {
+        color: white;
+        text-decoration: none;
+      }
+
+      /* Navbar */
+      .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(10px);
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      /* Marketplace Header */
+      .marketplace-header {
+        background: linear-gradient(
+            135deg,
+            rgba(30, 60, 114, 0.9),
+            rgba(42, 82, 152, 0.9)
+          ),
+          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%234a90e2" width="1200" height="600"/><path fill="%232a5298" d="M0,400 Q300,300 600,400 T1200,400 L1200,600 L0,600 Z"/></svg>')
+            center/cover;
+        color: white;
+        padding: 80px 30px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .marketplace-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>')
+          repeat;
+        animation: float 20s infinite linear;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        100% {
+          transform: translateY(-100px) rotate(360deg);
+        }
+      }
+
+      .marketplace-header h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .marketplace-header p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Container */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Products Section */
+      .products-section {
+        padding: 80px 0;
+        background: #f8f9ff;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .section-title h2 {
+        font-size: 2.5rem;
+        color: #1e3c72;
+        margin-bottom: 15px;
+        position: relative;
+      }
+
+      .section-title h2::after {
+        content: "";
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        display: block;
+        margin: 15px auto;
+        border-radius: 2px;
+      }
+
+      .section-title p {
+        font-size: 1.1rem;
+        color: #666;
+      }
+
+      /* Product Grid */
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        margin-bottom: 60px;
+      }
+
+      .product-category {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .product-category::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+      }
+
+      .product-category:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      }
+
+      .product-header {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .product-icon {
+        font-size: 4rem;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      .product-header h3 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .product-header p {
+        opacity: 0.9;
+        font-size: 1rem;
+      }
+
+      .product-content {
+        padding: 30px;
+      }
+
+      .product-items {
+        display: grid;
+        gap: 20px;
+      }
+
+      .product-item {
+        background: #f8f9ff;
+        padding: 20px;
+        border-radius: 15px;
+        border-left: 4px solid #2a5298;
+        transition: all 0.3s ease;
+      }
+
+      .product-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .product-name {
+        font-weight: 600;
+        color: #1e3c72;
+        font-size: 1.1rem;
+      }
+
+      .product-price {
+        color: #e74c3c;
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+
+      .product-description {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        line-height: 1.6;
+      }
+
+      .product-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .feature-tag {
+        background: rgba(30, 60, 114, 0.1);
+        color: #1e3c72;
+        padding: 4px 8px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .product-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .btn-whatsapp {
+        background: #25d366;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+      }
+
+      .btn-whatsapp:hover {
+        background: #1ea952;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+      }
+
+      .btn-info {
+        background: transparent;
+        color: #2a5298;
+        border: 2px solid #2a5298;
+        padding: 8px 15px;
+        border-radius: 25px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-info:hover {
+        background: #2a5298;
+        color: white;
+      }
+
+      /* Benefits Section */
+      .benefits-section {
+        padding: 80px 0;
+        background: white;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .benefit-item {
+        text-align: center;
+        padding: 30px 20px;
+        background: #f8f9ff;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .benefit-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .benefit-icon {
+        font-size: 3rem;
+        color: #2a5298;
+        margin-bottom: 20px;
+      }
+
+      .benefit-item h3 {
+        color: #1e3c72;
+        margin-bottom: 10px;
+      }
+
+      /* Footer - sama seperti website utama */
+      .footer {
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        color: white;
+        padding: 60px 30px 30px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-col h3 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        color: white;
+        position: relative;
+      }
+
+      .footer-col h3::after {
+        content: "";
+        width: 40px;
+        height: 3px;
+        background: linear-gradient(135deg, #2a5298, #4a90e2);
+        display: block;
+        margin-top: 10px;
+      }
+
+      .footer-col p,
+      .footer-col li {
+        margin-bottom: 10px;
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+
+      .footer-col ul {
+        list-style: none;
+      }
+
+      .footer-col a {
+        color: inherit;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .footer-col a:hover {
+        color: #4a90e2;
+        transform: translateX(5px);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        opacity: 0.8;
+      }
+
+      /* Floating WhatsApp */
+      .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 30px;
+        right: 30px;
+        background: #25d366;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 24px;
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+        text-decoration: none;
+      }
+
+      .whatsapp-float:hover {
+        transform: scale(1.1);
+        box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
+        color: white;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .topbar {
+          flex-direction: column;
+          gap: 10px;
+          padding: 15px;
+        }
+
+        .marketplace-header h1 {
+          font-size: 2.2rem;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .product-actions {
+          flex-direction: column;
+        }
+
+        .btn-whatsapp {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .marketplace-header {
+          padding: 60px 20px;
+        }
+
+        .marketplace-header h1 {
+          font-size: 1.8rem;
+        }
+
+        .product-content {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <span><i class="fas fa-phone"></i> 0857-0049-1588</span>
+        <span><i class="fas fa-envelope"></i> kencanaumrah@gmail.com</span>
+      </div>
+      <div class="topbar-right">
+        <a
+          href="https://web.facebook.com/SyarifHaramainKU?locale=id_ID&_rdc=1&_rdr"
+          target="_blank"
+          title="Facebook"
+        >
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a
+          href="https://www.instagram.com/syarifharamainku"
+          target="_blank"
+          title="Instagram"
+        >
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a
+          href="https://www.youtube.com/@SyarifHaramainKU"
+          target="_blank"
+          title="YouTube"
+        >
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://wa.me/6285700491588" target="_blank" title="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+    <div class="logo">PT. Kota Piring Kencana</div>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Beranda</a>
+      <a href="{{ url_for('index') }}#paket"><i class="fas fa-plane"></i> Lihat Paket Umroh</a>
+      <a href="{{ url_for('index') }}#kontak"><i class="fas fa-phone"></i> Kontak</a>
+      <a href="{{ url_for('marketplace') }}"><i class="fas fa-store"></i> Marketplace</a>
+    </div>
+  </nav>
+
+    <!-- Marketplace Header -->
+    <section class="marketplace-header">
+      <h1><i class="fas fa-shopping-cart"></i> Marketplace Keperluan Umroh</h1>
+      <p>
+        Lengkapi persiapan ibadah umroh Anda dengan produk berkualitas tinggi
+        dan terpercaya. Semua produk telah diseleksi khusus untuk kenyamanan
+        perjalanan spiritual Anda.
+      </p>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Produk Pilihan Terbaik</h2>
+          <p>
+            Koleksi lengkap keperluan umroh dengan kualitas premium dan harga
+            terjangkau
+          </p>
+        </div>
+
+        <div class="products-grid">
+          <!-- Koper Umroh -->
+          <div class="product-category">
+            <div class="product-header">
+              <i class="fas fa-suitcase-rolling product-icon"></i>
+              <h3>Koper Umroh</h3>
+              <p>Koper premium untuk perjalanan yang aman dan nyaman</p>
+            </div>
+            <div class="product-content">
+              <div class="product-items">
+                <div class="product-item">
+                  <div class="product-item-header">
+                    <div class="product-name">Koper ABS Hard Case 24"</div>
+                    <div class="product-price">Rp 1.200.000</div>
+                  </div>
+                  <div class="product-description">
+                    Koper premium dengan material ABS tahan benturan, roda 360°
+                    silent, dan kunci TSA. Dilengkapi dengan divider organizer
+                    untuk kemudahan packing.
+                  </div>
+                  <div class="product-features">
+                    <span class="feature-tag">Material ABS</span>
+                    <span class="feature-tag">Roda 360°</span>
+                    <span class="feature-tag">Kunci TSA</span>
+                    <span class="feature-tag">Garansi 2 tahun</span>
+                  </div>
+                  <div class="product-actions">
+                    <a
+                      href="https://wa.me/6285700491588?text=Halo, saya tertarik dengan Koper ABS Hard Case 24'' seharga Rp 1.200.000. Mohon info lebih lanjut."
+                      target="_blank"
+                      class="btn-whatsapp"
+                    >
+                      <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    <button
+                      class="btn-info"
+                      onclick="showProductInfo('Koper ABS Hard Case 24\'\'', 'Dimensi: 67x45x26 cm, Berat: 4.2 kg, Kapasitas: 60L, Tersedia warna: Hitam, Navy, Silver')"
+                    >
+                      Info Detail
+                    </button>
+                  </div>
+                </div>
+                <div class="product-item">
+                  <div class="product-item-header">
+                    <div class="product-name">Koper Softcase 28"</div>
+                    <div class="product-price">Rp 850.000</div>
+                  </div>
+                  <div class="product-description">
+                    Koper softcase dengan material polyester berkualitas tinggi,
+                    ringan namun kuat. Dilengkapi expandable zipper untuk
+                    kapasitas tambahan.
+                  </div>
+                  <div class="product-features">
+                    <span class="feature-tag">Polyester</span>
+                    <span class="feature-tag">Expandable</span>
+                    <span class="feature-tag">Ringan</span>
+                    <span class="feature-tag">Waterproof</span>
+                  </div>
+                  <div class="product-actions">
+                    <a
+                      href="https://wa.me/6285700491588?text=Halo, saya tertarik dengan Koper Softcase 28'' seharga Rp 850.000. Mohon info lebih lanjut."
+                      target="_blank"
+                      class="btn-whatsapp"
+                    >
+                      <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    <button
+                      class="btn-info"
+                      onclick="showProductInfo('Koper Softcase 28\'\'', 'Dimensi: 75x48x30 cm, Berat: 3.8 kg, Kapasitas: 80L (dapat diperluas hingga 95L), Tersedia warna: Hitam, Coklat, Navy')"
+                    >
+                      Info Detail
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kain Ihram -->
+          <div class="product-category">
+            <div class="product-header">
+              <i class="fas fa-tshirt product-icon"></i>
+              <h3>Kain Ihram</h3>
+              <p>
+                Kain ihram premium dari Madinah yang nyaman dan sesuai syar'i
+              </p>
+            </div>
+            <div class="product-content">
+              <div class="product-items">
+                <div class="product-item">
+                  <div class="product-item-header">
+                    <div class="product-name">Kain Ihram Madinah Premium</div>
+                    <div class="product-price">Rp 275.000</div>
+                  </div>
+                  <div class="product-description">
+                    Kain ihram import langsung dari Madinah dengan serat katun
+                    100% berkualitas tinggi. Lembut, menyerap keringat, dan
+                    tidak mudah kusut.
+                  </div>
+                  <div class="product-features">
+                    <span class="feature-tag">From Madinah</span>
+                    <span class="feature-tag">Katun 100%</span>
+                    <span class="feature-tag">Anti Kusut</span>
+                    <span class="feature-tag">Breathable</span>
+                  </div>
+                  <div class="product-actions">
+                    <a
+                      href="https://wa.me/6285700491588?text=Halo, saya tertarik dengan Kain Ihram Madinah Premium seharga Rp 275.000. Mohon info lebih lanjut."
+                      target="_blank"
+                      class="btn-whatsapp"
+                    >
+                      <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    <button
+                      class="btn-info"
+                      onclick="showProductInfo('Kain Ihram Madinah Premium', 'Ukuran: 115x220 cm, Bahan: Katun 100%, Warna: Putih bersih, Dilengkapi sertifikat keaslian dari Madinah')"
+                    >
+                      Info Detail
+                    </button>
+                  </div>
+                </div>
+                <div class="product-item">
+                  <div class="product-item-header">
+                    <div class="product-name">Kain Ihram Standar</div>
+                    <div class="product-price">Rp 150.000</div>
+                  </div>
+                  <div class="product-description">
+                    Kain ihram berkualitas baik dengan material cotton blend
+                    yang nyaman dan ekonomis. Cocok untuk jamaah dengan budget
+                    terbatas.
+                  </div>
+                  <div class="product-features">
+                    <span class="feature-tag">Cotton Blend</span>
+                    <span class="feature-tag">Ekonomis</span>
+                    <span class="feature-tag">Nyaman</span>
+                    <span class="feature-tag">Terjangkau</span>
+                  </div>
+                  <div class="product-actions">
+                    <a
+                      href="https://wa.me/6285700491588?text=Halo, saya tertarik dengan Kain Ihram Standar seharga Rp 150.000. Mohon info lebih lanjut."
+                      target="_blank"
+                      class="btn-whatsapp"
+                    >
+                      <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    <button
+                      class="btn-info"
+                      onclick="showProductInfo('Kain Ihram Standar', 'Ukuran: 110x210 cm, Bahan: Cotton Blend 70/30, Warna: Putih, Kemasan plastik kedap udara')"
+                    >
+                      Info Detail
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sabuk Ihram -->
+          <div class="product-category">
+            <div class="product-header">
+              <i class="fas fa-ribbon product-icon"></i>
+              <h3>Sabuk Ihram</h3>
+              <p>
+                Sabuk anti-slip untuk menjaga kain ihram tetap pada posisinya
+              </p>
+            </div>
+            <div class="product-content">
+              <div class="product-items">
+                <div class="product-item">
+                  <div class="product-item-header">
+                    <div class="product-name">Sabuk Ihram Silikon Premium</div>
+                    <div class="product-price">Rp 125.000</div>
+                  </div>
+                  <div class="product-description">
+                    Sabuk ihram dengan material silikon medis grade yang
+                    anti-slip dan hypoallergenic. Tidak menimbulkan iritasi dan
+                    sangat nyaman digunakan seharian.
+                  </div>
+                  <div class="product-features">
+                    <span class="feature-tag">Silikon Medis</span>
+                    <span class="feature-tag">Anti-Slip</span>
+                    <span class="feature-tag">Hypoallergenic</span>
+                    <span class="feature-tag">Adjustable</span>
+                  </div>
+                  <div class="product-actions">
+                    <a
+                      href="https://wa.me/6285700491588?text=Halo, saya tertarik dengan Sabuk Ihram Silikon Premium seharga Rp 125.000. Mohon info lebih lanjut."
+                      target="_blank"
+                      class="btn-whatsapp"
+                    >
+                      <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    <button
+                      class="btn-info"
+                      onclick="showProductInfo('Sabuk Ihram Silikon Premium', 'Panjang: 80-120 cm (adjustable), Lebar: 3 cm, Bahan: Silikon medis grade, Warna: Transparan/Putih')"
+                    >
+                      Info Detail
+                    </button>
+                  </div>
+                </div>
+                <div class="product-item">
+                  <div class="product-item-header">
+                    <div class="product-name">Sabuk Ihram Elastis</div>
+                    <div class="product-price">Rp 75.000</div>
+                  </div>
+                  <div class="product-description">
+                    Sabuk ihram berbahan elastis berkualitas yang memberikan
+                    kenyamanan maksimal. Mudah dipasang dan cocok untuk semua
+                    ukuran tubuh.
+                  </div>
+                  <div class="product-features">
+                    <span class="feature-tag">Elastis</span>
+                    <span class="feature-tag">Universal Size</span>
+                    <span class="feature-tag">Ekonomis</span>
+                    <span class="feature-tag">Breathable</span>
+                  </div>
+                  <div class="product-actions">
+                    <a
+                      href="https://wa.me/6285700491588?text=Halo, saya tertarik dengan Sabuk Ihram Elastis seharga Rp 75.000. Mohon info lebih lanjut."
+                      target="_blank"
+                      class="btn-whatsapp"
+                    >
+                      <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    <button
+                      class="btn-info"
+                      onclick="showProductInfo('Sabuk Ihram Elastis', 'Panjang: 70-110 cm (elastis), Lebar: 2.5 cm, Bahan: Polyester elastis, Warna: Putih')"
+                    >
+                      Info Detail
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sajadah Travel -->
+          <div class="product-category">
+            <div class="product-header">
+              <i class="fas fa-pray product-icon"></i>
+              <h3>Sajadah Travel</h3>
+              <p>Sajadah premium dengan kompas kiblat dan tas eksklusif</p>
+            </div>
+            <div class="product-content">
+              <div class="product-items">
+                <div class="product-item">
+                  <div class="product-item-header">
+                    <div class="product-name">
+                      Sajadah Travel Premium + Kompas
+                    </div>
+                    <div class="product-price">Rp 350.000</div>
+                  </div>
+                  <div class="product-description">
+                    Sajadah travel dengan bahan sutra premium, dilengkapi kompas
+                    kiblat digital dan tas eksklusif. Mudah dilipat dan
+                    anti-slip.
+                  </div>
+                  <div class="product-features">
+                    <span class="feature-tag">Sutra Premium</span>
+                    <span class="feature-tag">Kompas Digital</span>
+                    <span class="feature-tag">Tas Eksklusif</span>
+                    <span class="feature-tag">Anti-Slip</span>
+                  </div>
+                  <div class="product-actions">
+                    <a
+                      href="https://wa.me/6285700491588?text=Halo, saya tertarik dengan Sajadah Travel Premium + Kompas seharga Rp 350.000. Mohon info lebih lanjut."
+                      target="_blank"
+                      class="btn-whatsapp"
+                    >
+                      <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    <button
+                      class="btn-info"
+                      onclick="showProductInfo('Sajadah Travel Premium + Kompas', 'Ukuran: 110x70 cm, Bahan: Sutra premium, Kompas: Digital LCD, Tas: Eksklusif dengan zipper, Motif: Kaligrafi indah')"
+                    >
+                      Info Detail
+                    </button>
+                  </div>
+                </div>
+                <div class="product-item">
+                  <div class="product-item-header">
+                    <div class="product-name">Sajadah Travel Standar</div>
+                    <div class="product-price">Rp 200.000</div>
+                  </div>
+                  <div class="product-description">
+                    Sajadah travel dengan bahan katun berkualitas, dilengkapi
+                    kompas analog sederhana dan tas penyimpanan praktis.
+                  </div>
+                  <div class="product-features">
+                    <span class="feature-tag">Katun Berkualitas</span>
+                    <span class="feature-tag">Kompas Analog</span>
+                    <span class="feature-tag">Tas Praktis</span>
+                    <span class="feature-tag">Terjangkau</span>
+                  </div>
+                  <div class="product-actions">
+                    <a
+                      href="https://wa.me/6285700491588?text=Halo, saya tertarik dengan Sajadah Travel Standar seharga Rp 200.000. Mohon info lebih lanjut."
+                      target="_blank"
+                      class="btn-whatsapp"
+                    >
+                      <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    <button
+                      class="btn-info"
+                      onclick="showProductInfo('Sajadah Travel Standar', 'Ukuran: 105x65 cm, Bahan: Katun, Kompas: Analog sederhana, Tas: Polyester dengan tali serut, Motif: Islami klasik')"
+                    >
+                      Info Detail
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paket Lengkap -->
+          <div class="product-category">
+            <div class="product-header">
+              <i class="fas fa-box-open product-icon"></i>
+              <h3>Paket Lengkap</h3>
+              <p>Paket hemat untuk semua keperluan umroh Anda</p>
+            </div>
+            <div class="product-content">
+              <div class="product-items">
+                <div class="product-item">
+                  <div class="product-item-header">
+                    <div class="product-name">Paket Umroh Premium Complete</div>
+                    <div class="product-price">Rp 1.750.000</div>
+                  </div>
+                  <div class="product-description">
+                    Paket lengkap berisi: Koper ABS 24", Kain Ihram Madinah
+                    Premium, Sabuk Ihram Silikon, Sajadah Travel + Kompas, bonus
+                    tas travel dan perlengkapan mandi.
+                  </div>
+                  <div class="product-features">
+                    <span class="feature-tag">Hemat Rp 200.000</span>
+                    <span class="feature-tag">All Premium</span>
+                    <span class="feature-tag">Free Bonus</span>
+                    <span class="feature-tag">Garansi</span>
+                  </div>
+                  <div class="product-actions">
+                    <a
+                      href="https://wa.me/6285700491588?text=Halo, saya tertarik dengan Paket Umroh Premium Complete seharga Rp 1.750.000. Mohon info lebih lanjut."
+                      target="_blank"
+                      class="btn-whatsapp"
+                    >
+                      <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    <button
+                      class="btn-info"
+                      onclick="showProductInfo('Paket Umroh Premium Complete', 'Isi paket: Koper ABS 24\'\', Kain Ihram Madinah Premium, Sabuk Ihram Silikon, Sajadah Travel Premium, Tas travel, Perlengkapan mandi, Panduan umroh')"
+                    >
+                      Info Detail
+                    </button>
+                  </div>
+                </div>
+                <div class="product-item">
+                  <div class="product-item-header">
+                    <div class="product-name">Paket Umroh Ekonomis</div>
+                    <div class="product-price">Rp 1.200.000</div>
+                  </div>
+                  <div class="product-description">
+                    Paket ekonomis berisi: Koper Softcase 28", Kain Ihram
+                    Standar, Sabuk Ihram Elastis, Sajadah Travel Standar, bonus
+                    tas kecil dan panduan umroh.
+                  </div>
+                  <div class="product-features">
+                    <span class="feature-tag">Hemat Rp 75.000</span>
+                    <span class="feature-tag">Ekonomis</span>
+                    <span class="feature-tag">Berkualitas</span>
+                    <span class="feature-tag">Terjangkau</span>
+                  </div>
+                  <div class="product-actions">
+                    <a
+                      href="https://wa.me/6285700491588?text=Halo, saya tertarik dengan Paket Umroh Ekonomis seharga Rp 1.200.000. Mohon info lebih lanjut."
+                      target="_blank"
+                      class="btn-whatsapp"
+                    >
+                      <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    <button
+                      class="btn-info"
+                      onclick="showProductInfo('Paket Umroh Ekonomis', 'Isi paket: Koper Softcase 28\'\', Kain Ihram Standar, Sabuk Ihram Elastis, Sajadah Travel Standar, Tas kecil, Panduan umroh')"
+                    >
+                      Info Detail
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Mengapa Berbelanja di Marketplace Kami?</h2>
+          <p>
+            Keunggulan berbelanja keperluan umroh bersama PT. Kota Piring
+            Kencana
+          </p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <i class="fas fa-certificate benefit-icon"></i>
+            <h3>Produk Berkualitas</h3>
+            <p>
+              Semua produk telah diseleksi ketat dan memiliki sertifikat
+              kualitas internasional.
+            </p>
+          </div>
+          <div class="benefit-item">
+            <i class="fas fa-shipping-fast benefit-icon"></i>
+            <h3>Pengiriman Cepat</h3>
+            <p>
+              Pengiriman ke seluruh Indonesia dengan packaging aman dan tracking
+              nomor.
+            </p>
+          </div>
+          <div class="benefit-item">
+            <i class="fas fa-headset benefit-icon"></i>
+            <h3>Support 24/7</h3>
+            <p>
+              Tim customer service siap membantu Anda kapan saja via WhatsApp.
+            </p>
+          </div>
+          <div class="benefit-item">
+            <i class="fas fa-shield-alt benefit-icon"></i>
+            <h3>Garansi Resmi</h3>
+            <p>
+              Semua produk dilengkapi garansi resmi dan after-sales service
+              terbaik.
+            </p>
+          </div>
+          <div class="benefit-item">
+            <i class="fas fa-money-bill-wave benefit-icon"></i>
+            <h3>Harga Terjangkau</h3>
+            <p>
+              Harga kompetitif dengan kualitas premium, tersedia cicilan 0%.
+            </p>
+          </div>
+          <div class="benefit-item">
+            <i class="fas fa-users benefit-icon"></i>
+            <h3>Dipercaya 40+ Tahun</h3>
+            <p>
+              Pengalaman melayani ribuan jamaah sejak 1983 dengan kepuasan 100%.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section
+      class="products-section"
+      style="background: white; padding: 60px 0"
+    >
+      <div class="container">
+        <div
+          style="
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 60px;
+            border-radius: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+          "
+        >
+          <div style="position: relative; z-index: 2">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px">
+              Siap Berangkat Umroh?
+            </h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9">
+              Lengkapi persiapan Anda dengan produk berkualitas dari kami
+            </p>
+            <div
+              style="
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+              "
+            >
+              <a
+                href="https://wa.me/6285700491588?text=Halo, saya ingin konsultasi tentang produk keperluan umroh yang tersedia."
+                target="_blank"
+                style="
+                  background: #25d366;
+                  color: white;
+                  padding: 15px 30px;
+                  border-radius: 50px;
+                  text-decoration: none;
+                  font-weight: 600;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 10px;
+                  transition: all 0.3s ease;
+                "
+              >
+                <i class="fab fa-whatsapp"></i> Konsultasi Gratis
+              </a>
+              <a
+                href="{{ url_for('index') }}#paket"
+                style="
+                  background: transparent;
+                  color: white;
+                  border: 2px solid white;
+                  padding: 13px 30px;
+                  border-radius: 50px;
+                  text-decoration: none;
+                  font-weight: 600;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 10px;
+                  transition: all 0.3s ease;
+                "
+              >
+                <i class="fas fa-plane"></i> Lihat Paket Umroh
+              </a>
+            </div>
+          </div>
+          <div
+            style="
+              position: absolute;
+              top: -50%;
+              left: -50%;
+              width: 200%;
+              height: 200%;
+              background: radial-gradient(
+                circle,
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 70%
+              );
+              animation: shimmer 3s ease-in-out infinite;
+            "
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h3>PT. Kota Piring Kencana</h3>
+          <p>
+            "Menjadi Tamu Allah, Tidak Perlu Menunggu Lama, Mudahkan Langkahmu
+            ke Baitullah Bersama Kami"
+          </p>
+          <p><strong>Didirikan:</strong> 1983</p>
+          <p><strong>Melayani Umrah & Haji:</strong> Sejak 1997</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Layanan Kami</h3>
+          <ul>
+            <li><a href="index.html#paket">Paket Umrah</a></li>
+            <li><a href="index.html#paket-haji">Paket Haji</a></li>
+            <li><a href="index.html#layanan">Visa Umrah</a></li>
+            <li><a href="marketplace.html">Marketplace</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Kontak</h3>
+          <p><i class="fas fa-phone"></i> 0857-0049-1588</p>
+          <p><i class="fas fa-envelope"></i> kencanaumrah@gmail.com</p>
+          <p><i class="fas fa-globe"></i> www.syarifharamainku.com</p>
+          <div style="margin-top: 15px">
+            <a
+              href="https://web.facebook.com/SyarifHaramainKU?locale=id_ID&_rdc=1&_rdr"
+              target="_blank"
+              style="margin-right: 10px"
+            >
+              <i class="fab fa-facebook" style="cursor: pointer"></i>
+            </a>
+            <a
+              href="https://www.instagram.com/syarifharamainku"
+              target="_blank"
+              style="margin-right: 10px"
+            >
+              <i class="fab fa-instagram" style="cursor: pointer"></i>
+            </a>
+            <a
+              href="https://www.youtube.com/@SyarifHaramainKU"
+              target="_blank"
+              style="margin-right: 10px"
+            >
+              <i class="fab fa-youtube" style="cursor: pointer"></i>
+            </a>
+            <a href="https://wa.me/6285700491588" target="_blank">
+              <i class="fab fa-whatsapp" style="cursor: pointer"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Izin Resmi</h3>
+          <p><strong>Izin Haji:</strong> No. 1203 Tahun 2022</p>
+          <p><strong>Izin Umrah:</strong> No. U.63 Tahun 2022</p>
+          <p><strong>Anggota:</strong> HIMPUH, ASITA</p>
+          <p><strong>Terakreditasi:</strong> IATA</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2025 PT. Kota Piring Kencana. All rights reserved. | Dipimpin
+        oleh: Jachja Machmud, SE, M.Si
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a
+      href="https://wa.me/6285700491588"
+      target="_blank"
+      class="whatsapp-float"
+      title="Chat WhatsApp"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+      // Function to show product details
+      function showProductInfo(productName, details) {
+        Swal.fire({
+          title: productName,
+          html: details.replace(/,/g, "<br>"),
+          icon: "info",
+          confirmButtonText: "Tutup",
+          confirmButtonColor: "#2a5298",
+          width: "500px",
+          customClass: {
+            popup: "product-info-popup",
+          },
+        });
+      }
+
+      // Smooth scrolling for internal links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add hover effects
+      document.querySelectorAll(".product-category").forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-10px)";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0)";
+        });
+      });
+
+      // Add loading animation
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for animation
+      document
+        .querySelectorAll(".product-category, .benefit-item")
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(30px)";
+          el.style.transition = "all 0.8s ease";
+          observer.observe(el);
+        });
+
+      // Add some CSS for better product info popup
+      const style = document.createElement("style");
+      style.textContent = `
+            .product-info-popup {
+                font-family: 'Poppins', sans-serif !important;
+            }
+            .product-info-popup .swal2-html-container {
+                text-align: left !important;
+                line-height: 1.6 !important;
+            }
+        `;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>

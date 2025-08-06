@@ -72,6 +72,7 @@
           <li><a href="#tentang">Tentang</a></li>
           <li><a href="#layanan">Layanan</a></li>
           <li><a href="#paket">Paket</a></li>
+          <a href="{{ url_for('marketplace') }}">Marketplace</a>
           <li><a href="#galeri">Galeri</a></li>
           <li><a href="#testimoni">Testimoni</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -451,6 +452,7 @@
         </p>
       </div>
     </section>
+    <!-- Haji Section -->
     <section class="paket-haji-section" id="paket-haji">
       <div class="container">
         <h2 class="section-title">Paket Haji Khusus</h2>
@@ -671,6 +673,102 @@
               Daftar Sekarang
               <i class="fab fa-whatsapp"></i>
             </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section gray" id="marketplace">
+      <div class="container">
+        <h2 class="center">Marketplace Keperluan Umroh</h2>
+        <p class="center">
+          Lengkapi persiapan ibadah umroh Anda dengan produk berkualitas tinggi
+        </p>
+
+        <div class="marketplace-preview">
+          <div class="marketplace-cards">
+            <!-- Koper Umroh -->
+            <div class="marketplace-item fade-in">
+              <div class="marketplace-icon">
+                <i class="fas fa-suitcase-rolling"></i>
+              </div>
+              <h3>Koper Umroh</h3>
+              <p>Koper premium dengan roda 360° dan kunci TSA untuk perjalanan yang aman dan nyaman.</p>
+              <div class="price-preview">Mulai Rp 1.200.000</div>
+              <div class="features-mini">
+                <span><i class="fas fa-check"></i> Material ABS</span>
+                <span><i class="fas fa-check"></i> Garansi 2 tahun</span>
+              </div>
+            </div>
+
+            <!-- Kain Ihram -->
+            <div class="marketplace-item fade-in">
+              <div class="marketplace-icon">
+                <i class="fas fa-tshirt"></i>
+              </div>
+              <h3>Kain Ihram</h3>
+              <p>Kain ihram premium dari Madinah, katun 100% yang nyaman dan sesuai syar'i.</p>
+              <div class="price-preview">Mulai Rp 150.000</div>
+              <div class="features-mini">
+                <span><i class="fas fa-check"></i> Katun 100%</span>
+                <span><i class="fas fa-check"></i> Dari Madinah</span>
+              </div>
+            </div>
+
+            <!-- Sabuk Ihram -->
+            <div class="marketplace-item fade-in">
+              <div class="marketplace-icon">
+                <i class="fas fa-ribbon"></i>
+              </div>
+              <h3>Sabuk Ihram</h3>
+              <p>Sabuk anti-slip yang memastikan kain ihram tetap pada posisinya dengan nyaman.</p>
+              <div class="price-preview">Mulai Rp 75.000</div>
+              <div class="features-mini">
+                <span><i class="fas fa-check"></i> Anti-slip</span>
+                <span><i class="fas fa-check"></i> Elastis</span>
+              </div>
+            </div>
+
+            <!-- Sajadah -->
+            <div class="marketplace-item fade-in">
+              <div class="marketplace-icon">
+                <i class="fas fa-pray"></i>
+              </div>
+              <h3>Sajadah Travel</h3>
+              <p>Sajadah premium dengan kompas kiblat dan tas penyimpanan eksklusif.</p>
+              <div class="price-preview">Mulai Rp 200.000</div>
+              <div class="features-mini">
+                <span><i class="fas fa-check"></i> Kompas kiblat</span>
+                <span><i class="fas fa-check"></i> Tas exclusive</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="marketplace-cta">
+            <div class="cta-content">
+              <h3>Dapatkan Semua Keperluan Umroh Anda</h3>
+              <p>Belanja praktis dengan kualitas terjamin dan harga terjangkau</p>
+              <div class="cta-features">
+                <div class="cta-feature">
+                  <i class="fas fa-certificate"></i>
+                  <span>Produk Berkualitas</span>
+                </div>
+                <div class="cta-feature">
+                  <i class="fas fa-shipping-fast"></i>
+                  <span>Pengiriman Cepat</span>
+                </div>
+                <div class="cta-feature">
+                  <i class="fas fa-headset"></i>
+                  <span>Support 24/7</span>
+                </div>
+                <div class="cta-feature">
+                  <i class="fas fa-shield-alt"></i>
+                  <span>Garansi Resmi</span>
+                </div>
+              </div>
+              <a href="{{ url_for('marketplace') }}" class="btn-marketplace">Marketplace</a>
+                <span><i class="fas fa-shopping-cart"></i> Kunjungi Marketplace</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
