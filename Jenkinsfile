@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/JakaxKato/travel_new.git'
+                git url: 'https://github.com/JakaxKato/travel_new.git', branch: 'main'
             }
         }
 
@@ -16,7 +16,7 @@ pipeline {
 
         stage('Run Flask App') {
             steps {
-                sh 'nohup python3 app.py &'
+                sh 'python3 app.py'
             }
         }
     }
